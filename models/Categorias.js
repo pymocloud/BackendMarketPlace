@@ -20,6 +20,4 @@ const Categorias = sequelize.define('Categorias', {
   });
 
 
-
-
   module.exports = Categorias;

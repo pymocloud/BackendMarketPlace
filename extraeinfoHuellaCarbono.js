@@ -1,15 +1,15 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: './config/config.env' });
 
-function extrae_infoVoluntariado(item_id) {
+function extrae_infoHuellaCarbono(item_id) {
     //Declaracion del query de GraphQL que extrae la info requerida del item que se manda el webhook
-    let query = `  query {
+    let query = `query {
         items (ids:${item_id}) {
-          column_values {
-            text
-            id
-            type
-          }
+            column_values {
+                text
+                id
+                type
+              }
       }`;
   
     // Crear una nueva promesa
@@ -34,7 +34,7 @@ function extrae_infoVoluntariado(item_id) {
           // Extraer los ids y textos de los objetos filtrados
           const result = idsAndTexts.map(obj => ({ id: obj.id, text: obj.text }));
   
-          let poblacionObjetivo, nombreProveedor, descripcionProyecto, problematica, solucion, costoxvoluntario, min_voluntarios, max_voluntarios, fechasImplementacion,duracionVoluntariado, queIncluye, numPersonasImpactadas, fotos, categorias, ubicacion, ods, kpisImpacto, recursosAdicionales, idElemento =  "";
+          let poblacionObjetivo, nombreProveedor,idElemento, descripcionProyecto, problematica, alcance, certificado, entidadCertificadora, avancesCertificacion, linkCertificado,montoMin, costoxbonocreditom3, fondearUnidades, indicadorImpacto, procedimientoMedicion, resultadosImpacto, presentacion, costoProyecto, duracionProyecto, fotos, categorias, ubicacion, ods, kpisImpacto =  "";
   
           result.forEach(obj => {
             // Asignar los valores a las variables dependiendo del id
@@ -98,7 +98,7 @@ function extrae_infoVoluntariado(item_id) {
           });
   
           // Resolver la promesa con un objeto que contiene las variables asignadas
-          resolve({ poblacionObjetivo,nombreProveedor, descripcionProyecto, problematica, solucion, costoxvoluntario, min_voluntarios, max_voluntarios, fechasImplementacion,duracionVoluntariado, queIncluye, numPersonasImpactadas, fotos, categorias, ubicacion, ods, kpisImpacto, recursosAdicionales, idElemento });
+          resolve({ poblacionObjetivo, nombreProveedor,idElemento, descripcionProyecto, problematica, alcance, certificado, entidadCertificadora, avancesCertificacion, linkCertificado,montoMin, costoxbonocreditom3, fondearUnidades, indicadorImpacto, procedimientoMedicion, resultadosImpacto, presentacion, costoProyecto, duracionProyecto, fotos, categorias, ubicacion, ods, kpisImpacto });
         })
         .catch(error => {
           // Rechazar la promesa en caso de error
@@ -107,5 +107,5 @@ function extrae_infoVoluntariado(item_id) {
     });
   }
   
-  module.exports = extrae_infoVoluntariado;
+  module.exports = extrae_infoHuellaCarbono;
   
