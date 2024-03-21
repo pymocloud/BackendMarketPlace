@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 //Dentro de este post, se está haciendo la llamada al challenge referente a lo que se pulse para 
 //posteriormente hacer el tratamiento de datos adecuados para subirlo finalmente a AWS
 app.post("/", function (req, res) {
-
+/*
     let nombreProyecto = req.body.event.pulseName;
     let idItem = req.body.event.pulseId.toString();
     let estatus = req.body.event.value.label.text; //bandera "Listo" para subir los datos, "Eliminar" para borrar el registro de SQL
@@ -157,7 +157,7 @@ app.post("/", function (req, res) {
             }
         });
     }
-
+*/
     res.status(200).send(req.body);
 })
 
