@@ -13,6 +13,7 @@ const crearReporte = require("./bubble_creaReporte");
 const crearIntervencion = require("./bubble_creaIntervencion");
 const extrae_cotizaciones = require('./extrae_cotizaciones');
 const bubbleSubirCotizacion = require("./bubbleSubirCotizacion");
+const {chatgpt_textos_largos, chatgpt_poblacionObjetivo }= require("./chatgpt_function");
 
 
 app.use(bodyParser.json());
@@ -41,7 +42,7 @@ app.post("/", function (req, res) {
                     Categorias: data.categorias.split(","),
                     costoProyecto: parseFloat(data.costoProyecto),
                     cronograma: data.desglose,
-                    descripcionBeneficiarios: data.beneficiarios,
+                    descripcionBeneficiarios: chatgpt_poblacionObjetivo(data.beneficiarios),
                     descripcionProyecto: data.descripcionProyecto,
                     desglose: data.cronograma,
                     duracionProyecto: parseInt(data.duracionProyecto),
@@ -49,9 +50,9 @@ app.post("/", function (req, res) {
                     KPIs: data.kpi,
                     ods: data.ods.split(","),
                     poblacionObjetivo: data.beneficiarios,
-                    problematica: data.problema,
+                    problematica: chatgpt_textos_largos(data.problema),
                     proveedor: data.osc,
-                    solucion: data.solucion,
+                    solucion: chatgpt_textos_largos(data.solucion),
                     tipoProyecto: data.tipoProyecto,
                     ubicacion: data.estados.split(","),
                     fotoProblema: data.urlsArray[0],
@@ -162,9 +163,8 @@ app.post("/", function (req, res) {
 })
 
 app.get('/', (req, res) => {
-    res.send('Servidor Web MARKETPLACE');
+    res.send('Servidor Web desarrollo MARKETPLACE');
   })
-
 
 server.listen(process.env.PORT , function () {
     console.log(`Express server listening on port ${process.env.PORT}`);
